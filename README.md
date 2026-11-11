@@ -1,18 +1,20 @@
 # Trublica examples
 
-Small agents you can deploy on [Trublica](https://github.com/kartikpathe-kp) with one click — paste this repo's URL
-(or a folder link like `.../tree/main/echo-agent`) into **Add → GitHub Repository**.
+Example agents you can publish on [Trublica](https://trublica.milo.study). Each folder has a `manifest.json` (the body
+you post to `/v1/projects/{project}/listing/publish`), a README and its service source.
 
-| Folder | Framework | Needs |
-| --- | --- | --- |
-| [echo-agent](echo-agent) | plain function | nothing |
-| [anthropic-agent](anthropic-agent) | Anthropic SDK + tools | `ANTHROPIC_API_KEY` |
-| [openai-agent](openai-agent) | OpenAI Agents SDK | `OPENAI_API_KEY` |
-| [langgraph-agent](langgraph-agent) | LangGraph / LangChain | `ANTHROPIC_API_KEY` or `OPENAI_API_KEY` |
-| [deep-agent](deep-agent) | Deep Agents | `ANTHROPIC_API_KEY` or `OPENAI_API_KEY` |
-| [node-agent](node-agent) | TypeScript (streaming) | nothing |
-| [anthropic-node-agent](anthropic-node-agent) | TypeScript + Anthropic SDK | `ANTHROPIC_API_KEY` |
-| [go-agent](go-agent) | Go, via its own Dockerfile | nothing |
+| Example | Surface | What it shows |
+|---|---|---|
+| [`ledger-lens`](ledger-lens/) | form, one sealed service | Confidential bank vs gateway settlement reconciliation: files in, `.xlsx` out, a question when credits stay unmatched, no network egress |
 
-Python folders are agentpacks: `requirements.txt` + an `agent.py` exporting `agent` (or `graph`). TypeScript folders: `package.json` + an `agent.ts` exporting `agent`. Anything else: a `Dockerfile`. No server code needed except in the Dockerfile case.
-Add API keys under the service's **Variables** tab, redeploy, then call `POST <service URL>/runs`.
+## Tests
+
+Unit tests run offline:
+
+```
+cd ledger-lens/agent
+uv run --with-requirements requirements-dev.txt pytest -q
+```
+
+The Docker end-to-end test lives in the platform repo (`api/tests/test_e2e_agent_ledger_lens.py`). It reads this
+checkout from `TRUBLICA_EXAMPLES_DIR`, or from a sibling `../trublica-examples` folder by default.

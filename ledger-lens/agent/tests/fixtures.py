@@ -1,0 +1,20 @@
+"""Fixture files: an Indian bank statement (dd/mm/yyyy, debit and credit columns, UPI and NEFT narrations) and a
+gateway settlement report. 6 bank credits; 2 payout batches cover 5 of them; one credit of 42,500.00 is unmatched."""
+
+BANK = """Txn Date,Narration,Chq./Ref.No.,Withdrawal Amt.,Deposit Amt.,Closing Balance
+13/01/2026,UPI/CR/301311111111/ACME STORE ORDERS/RZP,301311111111,,"50,000.00","2,50,000.00"
+14/01/2026,UPI/CR/301411111112/ACME STORE ORDERS/RZP,301411111112,,"30,000.00","2,80,000.00"
+14/01/2026,NEFT-RZP-BATCHPART-ACME,N0114,,"17,640.00","2,97,640.00"
+15/01/2026,IMPS/DR/VENDOR PAYMENT AWS,IMPS9001,"12,345.67",,"2,85,294.33"
+16/01/2026,UPI/CR/301611111113/CASHFREE PAYOUT,301611111113,,"30,230.00","3,15,524.33"
+16/01/2026,NEFT-CF-BATCHPART-ACME,N0116,,"18,000.00","3,33,524.33"
+20/01/2026,UPI/CR/302011111114/ROHIT SHARMA/PAYMENT,302011111114,,"42,500.00","3,76,024.33"
+22/01/2026,ACH/DR/OFFICE RENT,ACH7788,"60,000.00",,"3,16,024.33"
+"""
+
+SETTLEMENTS = """Settlement ID,Gateway,Settled On,Gross Amount,Fee,Tax,Net Amount
+setl_RZP_0113,Razorpay,13/01/2026,"1,00,000.00","2,000.00",360.00,"97,640.00"
+setl_CF_0115,Cashfree,15/01/2026,"50,000.00","1,500.00",270.00,"48,230.00"
+"""
+
+UNMATCHED_AMOUNT = 4_250_000  # minor units

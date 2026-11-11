@@ -1,8 +1,0 @@
-{
-  "name": "anthropic-node-agent",
-  "private": true,
-  "type": "module",
-  "dependencies": {
-    "@anthropic-ai/sdk": "latest"
-  }
-}
