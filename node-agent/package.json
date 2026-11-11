@@ -1,6 +1,0 @@
-{
-  "name": "node-agent",
-  "private": true,
-  "type": "module",
-  "dependencies": {}
-}

@@ -1,0 +1,27 @@
+{
+  "title": "LedgerLens",
+  "tagline": "Reconcile your bank statement against gateway settlements, privately, and get an Excel workbook back.",
+  "category": "finance",
+  "run_type": "form",
+  "surface": "chat",
+  "price_type": "per_run",
+  "creator_fee_micros": 300000,
+  "model_allowance_micros": 200000,
+  "built_with": ["langgraph"],
+  "manifest": {
+    "inputs": {
+      "type": "object",
+      "required": ["bank", "settlements"],
+      "properties": {
+        "bank": {"type": "file", "title": "Bank statement (CSV)", "accept": ["text/csv", "text/plain", "application/vnd.ms-excel"]},
+        "settlements": {"type": "file", "title": "Gateway settlements report (CSV)", "accept": ["text/csv", "text/plain", "application/vnd.ms-excel"]},
+        "invoices": {"type": "file", "title": "Invoices (CSV, or a ZIP of PDFs), optional", "accept": ["text/csv", "text/plain", "application/vnd.ms-excel", "application/zip", "application/x-zip-compressed"]},
+        "expected_fee_pct": {"type": "number", "title": "Expected gateway fee %, default 2.0"}
+      }
+    },
+    "models": ["anthropic/claude-sonnet-5.5"],
+    "network": {"allow": []},
+    "state": {"checkpoints": true},
+    "sample": {"expected_fee_pct": 2.0}
+  }
+}
